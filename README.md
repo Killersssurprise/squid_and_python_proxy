@@ -119,7 +119,7 @@ print(response.text)
 Then I wanted make creating server automatically. For this purpouse you should crate your install.sh file using via ssh console in the server like
 Create install.sh file: ```sudo nano install.sh```
 
-Then paste this code and replace userlogin and userpassword for your own login and pass. 
+Then paste this code and replace userlogin and userpassword for your own login and pass. You can change the port using the proxy, my one is 3201. 
 ```
 #!/bin/sh
 
