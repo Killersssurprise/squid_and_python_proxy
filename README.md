@@ -1,6 +1,10 @@
 ### Note
 I found this solution on ackblk https://gist.github.com/jackblk/fdac4c744ddf2a0533278a38888f3caf source and modified it a bit. 
 
+This is tutorial how to create your onw proxie on linux\ubuntu servers with login and password and use it with python. 
+
+AUTOMATIC installer at the end of article. Read it first.
+
 This tutorial is for Ubuntu & Squid3. Use AWS, Google cloud, Digital Ocean or any services with Ubuntu to follow this tutorial.
 
 ### Install squid & update
