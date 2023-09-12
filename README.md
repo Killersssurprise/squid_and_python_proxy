@@ -113,7 +113,52 @@ url = 'https://httpbin.org/ip'
 
 response = session.get(url, verify=False)
 
-print(response.text)```
+print(response.text)
+```
 
+Then I wanted make creating server automatically. For this purpouse you should crate your install.sh file using via ssh console in the server like
+Create install.sh file: ```sudo nano install.sh```
 
+Then paste this code and replace userlogin and userpassword for your own login and pass. 
+```
+#!/bin/sh
 
+sudo apt-get update -y
+
+sudo apt-get install squid -y
+
+sudo apt-get install apache2-utils -y
+
+sudo touch /etc/squid/passwords
+
+sudo chmod 777 /etc/squid/passwords
+
+sudo htpasswd -c -b /etc/squid/passwords userlogin userpassword
+
+sudo mv /etc/squid/squid.conf /etc/squid/squid.conf.original
+
+echo "auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwords
+auth_param basic realm Squid proxy-caching web server
+auth_param basic credentialsttl 24 hours
+auth_param basic casesensitive off
+acl authenticated proxy_auth REQUIRED
+http_access allow authenticated
+http_access deny all
+dns_v4_first on
+forwarded_for delete
+via off
+http_port 3201" >> /etc/squid/squid.conf
+
+sudo service squid start
+
+sudo systemctl restart squid.service
+```
+Then it had to be installed. 
+```
+sh install.sh
+```
+
+Thats all. If you did some changes in squid.conf file don't forget to make restart of the service. 
+```
+sudo systemctl restart squid.service
+```
